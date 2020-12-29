@@ -53,18 +53,18 @@ class Identity {
         }
     }
 
-    /**
-     * Returns a list of active tokens
-     */
-    static async get grantedTokenList(_id) {
-        try {
-            return IdentityModel.findById(_id)
-                .select('grantedTokenList -_id')
-                .exec()
-        } catch (error) {
-            throw error;
-        }
-    }
+    // /**
+    //  * Returns a list of active tokens
+    //  */
+    // static async get grantedTokenList(_id) {
+    //     try {
+    //         return IdentityModel.findById(_id)
+    //             .select('grantedTokenList -_id')
+    //             .exec()
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // }
 
     static async createIdentity({ name, email, schoolIssuedID, password, school }) {
         try {

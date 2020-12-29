@@ -4,7 +4,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 const mongoose = require('mongoose');
 const Ajv = require("ajv")
-const ajv = new Ajv({ allErrors: true })
+const ajv = new Ajv.default({ allErrors: true })
 
 mongoose.connect(process.env.MONGO_STORE_URL)
 
