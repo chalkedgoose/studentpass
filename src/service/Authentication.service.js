@@ -1,6 +1,6 @@
-const Identity = require('../models/Identity');
 const argon2 = require('argon2');
 const JsonWebTokenGenerator = require('./JsonWebTokenGenerator.service');
+const IdentityRepo = require('../repo/Identity.repo');
 
 class Authentication {
 
@@ -20,22 +20,30 @@ class Authentication {
      */
     async register(name, email, schoolIssuedID, school, plainTextPassword) {
 
-        const hashedPassword = String(await argon2.hash(plainTextPassword, {
-            secret: process.env.ARGON_HASHING_SECRET
-        }));
+        try {
+            const hashedPassword = String(await argon2.hash(plainTextPassword, {
+                secret: process.env.ARGON_HASHING_SECRET
+            }));
 
-        const identityRecord = await Identity.create({
-            name, email, schoolIssuedID, password: hashedPassword,
-            school
-        });
+            const identityRecord = await IdentityRepo.createIdentity({
+                name, email, schoolIssuedID, password: hashedPassword,
+                school
+            });
 
-        return {
-            token: JsonWebTokenGenerator.generateJsonWebToken({
+            const generatedToken = JsonWebTokenGenerator.generateJsonWebToken({
                 _id: identityRecord._id,
                 name,
                 email,
                 schoolIssuedID
             })
+
+            IdentityRepo.addToGrantedTokenList(generatedToken, identityRecord._id)
+
+            return {
+                token: generatedToken
+            }
+        } catch (error) {
+            throw error;
         }
 
     }
@@ -48,22 +56,25 @@ class Authentication {
      */
     async login(email, plainTextPassword) {
 
-        const identityRecord = await Identity.findOne({
-            email
-        });
+        const identityRecord = await IdentityRepo.findIdentityByEmail(email);
 
         const isValidPassword = await argon2.verify(identityRecord.password, plainTextPassword, {
             secret: process.env.ARGON_HASHING_SECRET,
         });
 
         if (isValidPassword) {
+
+            const generatedToken = JsonWebTokenGenerator.generateJsonWebToken({
+                _id: identityRecord._id,
+                name: identityRecord.name,
+                email: identityRecord.email,
+                schoolIssuedID: identityRecord.schoolIssuedID
+            });
+
+            await IdentityRepo.addToGrantedTokenList(generatedToken, identityRecord._id)
+
             return {
-                token: JsonWebTokenGenerator.generateJsonWebToken({
-                    _id: identityRecord._id,
-                    name: identityRecord.name,
-                    email: identityRecord.email,
-                    schoolIssuedID: identityRecord.schoolIssuedID
-                })
+                token: generatedToken
             }
         }
 
