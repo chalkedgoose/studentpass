@@ -16,7 +16,7 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
     try {
         const isValid = registerValidator(req.body);
 
@@ -33,7 +33,7 @@ app.post('/register', (req, res) => {
     }
 })
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         const isValid = loginValidator(req.body);
 
