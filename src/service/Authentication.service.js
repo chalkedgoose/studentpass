@@ -1,7 +1,7 @@
 const argon2 = require('argon2');
 const JsonWebTokenGenerator = require('./JsonWebTokenGenerator.service');
 const IdentityRepo = require('../repo/Identity.repo');
-
+const DecodedAuthenticationJWT = require('../dataclasses/DecodedAuthenticationJWT.dataclass');
 class Authentication {
 
     /**
@@ -80,6 +80,16 @@ class Authentication {
 
         throw new Error('Not the correct password!')
 
+    }
+
+    async accessIdentityData(token) {
+        try {
+            const userTokenData = await new DecodedAuthenticationJWT(JsonWebTokenGenerator.generateDecodedJsonWebToken(token));
+            const userData = await IdentityRepo.findIdentityByID(userTokenData._id);
+            return userData;
+        } catch (error) {
+            throw error;
+        }
     }
 
 }
