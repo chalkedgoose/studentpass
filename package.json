@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon — exec babel-node src/studentpass.js",
+    "start": "nodemon studentpass.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,15 +21,10 @@
     "express": "^4.17.1",
     "helmet": "^4.3.1",
     "jsonwebtoken": "^8.5.1",
+    "liquidjs": "^9.19.0",
     "mongoose": "^5.11.9"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/node": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
     "nodemon": "^2.0.6"
   }
 }
