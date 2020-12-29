@@ -6,7 +6,12 @@ const mongoose = require('mongoose');
 const Ajv = require("ajv")
 const ajv = new Ajv.default({ allErrors: true })
 
-mongoose.connect(process.env.MONGO_STORE_URL)
+mongoose.connect(process.env.MONGO_STORE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: true,
+})
 
 const authenticationService = require('./service/Authentication.service');
 const registerValidator = require('./validators/register.validator');
