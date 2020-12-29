@@ -55,7 +55,7 @@ app.post('/login', async (req, res) => {
 })
 
 app.listen(5050, () => {
-    console.log('Student Pass listening at http://localhost:5050')
+    console.log('Student Pass 🚀 listening at http://localhost:5050')
 })
 
 
