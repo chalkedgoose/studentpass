@@ -11,6 +11,15 @@ class Identity {
     }
 
     /**
+     * Finds identity by ID
+     * @param {string} _id 
+     */
+    static async findIdentityByID(_id) {
+        return IdentityModel.findById(_id)
+            .exec()
+    }
+
+    /**
      * Adds token to the token blacklist
      * @param {string} token 
      * @param {string} _id 
