@@ -1,9 +1,12 @@
-require('dotenv').config();
-const express = require('express')
-const helmet = require('helmet')
-const cors = require('cors')
-const mongoose = require('mongoose');
-const Ajv = require("ajv")
+
+import { config } from 'dotenv'
+config()
+
+import express from 'express'
+import helmet from 'helmet'
+import cors from 'cors'
+import mongoose from 'mongoose'
+import Ajv from "ajv"
 const ajv = new Ajv.default({ allErrors: true })
 
 mongoose.connect(process.env.MONGO_STORE_URL, {
@@ -13,9 +16,9 @@ mongoose.connect(process.env.MONGO_STORE_URL, {
     useFindAndModify: true,
 })
 
-const authenticationService = require('./service/Authentication.service');
-const registerValidator = require('./validators/register.validator');
-const loginValidator = require('./validators/login.validator');
+import authenticationService from './service/Authentication.service.js';
+import registerValidator from './validators/register.validator.js';
+import loginValidator from './validators/login.validator.js';
 
 const app = express();
 app.use(helmet());

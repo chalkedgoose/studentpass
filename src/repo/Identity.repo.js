@@ -1,6 +1,6 @@
-const IdentityModel = require('../models/Identity');
+import IdentityModel from '../models/Identity.js'
 
-class Identity {
+export default class Identity {
     /**
      * Finds identity by email
      * @param {string} email 
@@ -78,5 +78,3 @@ class Identity {
         }
     }
 }
-
-module.exports = Identity;

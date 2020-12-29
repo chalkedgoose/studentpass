@@ -1,6 +1,6 @@
-const jsonwebtoken = require('jsonwebtoken');
+import jsonwebtoken from 'jsonwebtoken';
 
-class JsonWebTokenGenerator {
+export default class JsonWebTokenGenerator {
     /**
      * Generate JSON Web Token
      * @param {object} payload 
@@ -31,5 +31,3 @@ class JsonWebTokenGenerator {
     }
 
 }
-
-module.exports = JsonWebTokenGenerator;

@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 // TODO(1) Implement ThirdPartyApp Relay
 
@@ -8,7 +8,7 @@ const axios = require('axios');
  * authenticate with our service and access student 
  * Identities.
  */
-class ThirdPartyApp {
+export default class ThirdPartyApp {
     static sendExternalAccessToken(applicationURL, path = "/oauth-callback") {
         // response = axios.post(applicationURL + path)
         return

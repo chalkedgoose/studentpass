@@ -2,7 +2,7 @@
  * To be used within the Authentication Service 
  * for the Decoded JWTs generated in the service.
  */
-class DecodedAuthenticationJWT {
+export default class DecodedAuthenticationJWT {
     constructor({
         _id,
         name,
@@ -16,5 +16,3 @@ class DecodedAuthenticationJWT {
     }
 
 }
-
-module.exports = DecodedAuthenticationJWT;

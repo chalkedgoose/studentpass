@@ -1,8 +1,8 @@
-const argon2 = require('argon2');
-const JsonWebTokenGenerator = require('./JsonWebTokenGenerator.service');
-const IdentityRepo = require('../repo/Identity.repo');
-const DecodedAuthenticationJWT = require('../dataclasses/DecodedAuthenticationJWT.dataclass');
-class Authentication {
+import * as argon2 from 'argon2';
+import JsonWebTokenGenerator from './JsonWebTokenGenerator.service.js';
+import IdentityRepo from '../repo/Identity.repo.js';
+import DecodedAuthenticationJWT from '../dataclasses/DecodedAuthenticationJWT.dataclass.js';
+export default class Authentication {
 
     /**
      * @typedef {Object} PublicIdentityTokenObject
@@ -93,5 +93,3 @@ class Authentication {
     }
 
 }
-
-module.exports = Authentication;
