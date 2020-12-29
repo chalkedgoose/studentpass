@@ -18,7 +18,7 @@ class Authentication {
      * @param {string} plainTextPassword 
      * @returns {Promise<PublicIdentityTokenObject>}
      */
-    async register(name, email, schoolIssuedID, school, plainTextPassword) {
+    static async register(name, email, schoolIssuedID, school, plainTextPassword) {
 
         try {
             const hashedPassword = String(await argon2.hash(plainTextPassword, {
@@ -54,7 +54,7 @@ class Authentication {
      * @param {string} plainTextPassword 
      * @returns {Promise<PublicIdentityTokenObject>}
      */
-    async login(email, plainTextPassword) {
+    static async login(email, plainTextPassword) {
 
         const identityRecord = await IdentityRepo.findIdentityByEmail(email);
 
@@ -82,7 +82,7 @@ class Authentication {
 
     }
 
-    async accessIdentityData(token) {
+    static async accessIdentityData(token) {
         try {
             const userTokenData = await new DecodedAuthenticationJWT(JsonWebTokenGenerator.generateDecodedJsonWebToken(token));
             const userData = await IdentityRepo.findIdentityByID(userTokenData._id);
