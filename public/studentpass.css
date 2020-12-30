@@ -21,3 +21,17 @@
     justify-content: flex-end;
     gap: 12px;
 }
+
+
+.register-account-image {
+    @apply --noselect-mixin;
+    height: 150px;
+}
+
+.register-account-action-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}

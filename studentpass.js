@@ -72,7 +72,11 @@ app.post('/login', async (req, res) => {
 
 
 app.get('/', (req, res) => {
-    res.render('index')
+    res.render('index');
+})
+
+app.get('/register-account', (req, res) => {
+    res.render('register-account');
 })
 
 app.listen(5050, () => {
