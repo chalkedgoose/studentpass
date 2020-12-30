@@ -1,12 +1,43 @@
 {% layout "template/default-page-layout.liquid" %}
 
 {% block content %}
-<div class="container">
+<div class="container mt-5 ">
+
+    <a class="btn btn-dark mb-5" href="/developer-portal">
+        <i class="fa fa-code-branch"></i>
+        Developer Portal
+    </a>
+
     <h1>Student Pass</h1>
     <p>
         A proof of concept Authentication Service for 
         colleges in FHDA district and the surrounding areas. 
     </p>
+
+    <div class="text-center">
+        <img draggable="false" class="landing-image" src="./wolverine.svg" alt="Animal Logo">
+    </div>
+ 
+    <div class="mb-3">
+        <label for="studentPassEmail" class="form-label">Email</label>
+        <input autocomplete="email" type="email" class="form-control form-control-lg" id="studentPassEmail" placeholder="jbalboa@domain.edu">
+    </div>
+
+    <div class="mb-3">
+        <label for="studentPassPassword" class="form-label">Password</label>
+        <input autocomplete="current-password" type="password" class="form-control form-control-lg" id="studentPassPassword" placeholder="strong-password">
+    </div>
+
+    <div class="index-action-row">
+        <button class="btn btn-secondary">
+            Login
+        </button>
+
+        <a href="/register-account" class="btn btn-primary">
+            Register
+        </a>
+    </div>
+
 </div>
 {% endblock %}
 
