@@ -75,8 +75,42 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
+
+
 app.get('/register-account', (req, res) => {
     res.render('register-account');
+})
+
+
+app.get('/student-dashboard', (req, res) => {
+
+    function today() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        return mm + '/' + dd + '/' + yyyy;
+    }
+
+    res.render('student-dashboard', {
+        profile: {
+            name: 'Jane Doe',
+            email: 'janedoe@college.edu',
+            school: 'Smith College',
+            schoolIssuedID: '20565697',
+            image: '/jane.jpeg'
+        },
+        thirdPartyApplications: [{
+            name: 'Foothill Food Pantry',
+            description: `Sint dreamcatcher vinyl you probably haven't heard of them do DIY. Vaporware poke ipsum seitan.`,
+            lastLogin: today()
+        },
+        {
+            name: 'Foothill Tutoring Center',
+            description: `Sint dreamcatcher vinyl you probably haven't heard of them do DIY. Vaporware poke ipsum seitan.`,
+            lastLogin: today()
+        },]
+    });
 })
 
 app.listen(5050, () => {

@@ -1,0 +1,54 @@
+{% layout "template/default-page-layout.liquid" %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Student Dashboard</h1>
+
+        <p>Find out which apps are accessing your data and why. 
+            You can also manage your data access.
+        </p>
+
+        <div class="row">
+            <div class="col-sm mb-5">
+                <div class="text-start ">
+                    <h2>{{profile.name}}</h2>
+                    <img style="height: 200px; width:300px;" class="img-thumbnail" src={{profile.image}} alt={{profile.name}}/>
+                    <h3 class="mt-2">School: {{profile.school}} </h3> 
+                    <h3>ID: {{profile.schoolIssuedID}}</h3>
+                </div>
+            </div>
+            <div class="col-sm mb-5">
+                <h2>Security Updates</h2>
+                <hr/>
+                <p>Your studentpass Password Hasn't been scanned by us yet want to scan it?</p>
+                <div class="mb-3">
+                    <label for="studentPassPassword" class="form-label">Password</label>
+                    <input autocomplete="current-password" type="password" class="form-control form-control-lg" id="studentPassPassword" placeholder="^ksMgWRbVr*@lsT">
+                </div>
+                <button class="btn btn-lg">Scan</button>
+                <button class="btn btn-danger btn-lg">Reset Password</button>
+
+                <div class="mb-3 mt-5">
+                    <label for="studentPassPassword" class="form-label">Want to configure a Yubikey?</label>
+                    <input class="form-control form-control-lg" id="studentPassYubikeyOTP" placeholder="cccjgjgkhcbbirdrfdnlnghhfgrtnnlgedjlftrbdeut">
+                    <small class="form-text text-muted">You should only use the Yubikey if you know what you are doing. this will make the OTP required each time you login.</small>
+                </div>
+            </div>
+        </div>
+
+        {%- for application in thirdPartyApplications %}
+            <div class="student-dashboard-application-card">
+                <h2>
+                    {{ application.name }}
+                </h2>
+                <small>Last Login: {{ application.lastLogin }}</small>
+                <p>
+                    {{ application.description }}
+                </p>
+                <button class="mb-2 btn btn-danger btn-lg">Revoke Data Access</button>
+                <button class="mb-2 btn btn-primary btn-lg">Application Usage Info</button>
+            </div>
+        {%- endfor%}
+    </div>
+{% endblock %}
+
